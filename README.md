@@ -1,2 +1,1 @@
-# myports
-Collection of modified OpenBSD ports I use
+Just a random sample of OpenBSD ports I modified to my needs.  Copyright belongs to the original authors, blah ...
