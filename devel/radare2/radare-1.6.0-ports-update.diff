@@ -1,5 +1,5 @@
 diff --git Makefile.inc Makefile.inc
-index f0f0022..90ee804 100644
+index f0f0022..be66317 100644
 --- Makefile.inc
 +++ Makefile.inc
 @@ -6,7 +6,7 @@ ONLY_FOR_ARCHS ?=	amd64 i386
@@ -11,15 +11,14 @@ index f0f0022..90ee804 100644
  SUBST_VARS +=		V
  
  CATEGORIES ?=		devel
-@@ -18,9 +18,9 @@ PERMIT_PACKAGE_CDROM ?=		Yes
+@@ -18,9 +18,7 @@ PERMIT_PACKAGE_CDROM ?=		Yes
  PERMIT_PACKAGE_FTP ?=		Yes
  PERMIT_DISTFILES_FTP ?=		Yes
  
 -MASTER_SITES ?=		http://www.radare.org/get/
-+MASTER_SITES ?=		http://radare.mikelloc.com/get/1.6.0/
- 
+-
 -EXTRACT_SUFX ?=		.tar.xz
-+EXTRACT_SUFX ?=		.tar.gz
++MASTER_SITES ?=		http://radare.mikelloc.com/get/${V}
  
  USE_GMAKE ?=		Yes
  CONFIGURE_STYLE ?=	simple
@@ -33,7 +32,7 @@ index 42f4782..0bcc14b 100644
 +SHA256 (radare2-bindings-1.6.0.tar.gz) = q8MgxPU1PxXZakAyk0klPxQPCSEHTw0Nvuazy58AZ7g=
 +SIZE (radare2-bindings-1.6.0.tar.gz) = 1197753
 diff --git main/Makefile main/Makefile
-index 1252f03..16e0931 100644
+index 1252f03..2231858 100644
 --- main/Makefile
 +++ main/Makefile
 @@ -5,9 +5,9 @@ COMMENT =		reverse engineers disassembler and debugger
@@ -41,7 +40,7 @@ index 1252f03..16e0931 100644
  
  # In radare, all libs have the same version
 -LIBV =			2.0	# 0.10.6
-+LIBV =			2.0	# 1.6.0
++LIBV =			3.0	# 1.6.0
  .for _lib in r_anal r_asm r_bin r_bp r_config r_cons r_core \
 -	r_crypto r_debug r_egg r_flags r_fs r_hash r_io r_lang \
 +	r_crypto r_debug r_egg r_flag r_fs r_hash r_io r_lang \
