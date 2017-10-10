@@ -1,7 +1,7 @@
-diff --git Makefile.inc Makefile.inc
-index f0f0022..be66317 100644
---- Makefile.inc
-+++ Makefile.inc
+diff --git a/Makefile.inc b/Makefile.inc
+index f0f00222637..7c23bfbd34d 100644
+--- a/Makefile.inc
++++ b/Makefile.inc
 @@ -6,7 +6,7 @@ ONLY_FOR_ARCHS ?=	amd64 i386
  # that don't. We know powerpc is busted.
  #ONLY_FOR_ARCHS ?=	arm mips64 mips64el powerpc sparc64
@@ -18,23 +18,34 @@ index f0f0022..be66317 100644
 -MASTER_SITES ?=		http://www.radare.org/get/
 -
 -EXTRACT_SUFX ?=		.tar.xz
-+MASTER_SITES ?=		http://radare.mikelloc.com/get/${V}
++MASTER_SITES ?=		http://radare.mikelloc.com/get/${V}/
  
  USE_GMAKE ?=		Yes
  CONFIGURE_STYLE ?=	simple
-diff --git bindings/distinfo bindings/distinfo
-index 42f4782..0bcc14b 100644
---- bindings/distinfo
-+++ bindings/distinfo
+diff --git a/bindings/distinfo b/bindings/distinfo
+index 42f478206d3..0bcc14b6bb5 100644
+--- a/bindings/distinfo
++++ b/bindings/distinfo
 @@ -1,2 +1,2 @@
 -SHA256 (radare2-bindings-0.10.6.tar.xz) = u4DlpSOhSmKbl4vCX9WikFRUIO+v7FQpRIo4nIG1xvY=
 -SIZE (radare2-bindings-0.10.6.tar.xz) = 861548
 +SHA256 (radare2-bindings-1.6.0.tar.gz) = q8MgxPU1PxXZakAyk0klPxQPCSEHTw0Nvuazy58AZ7g=
 +SIZE (radare2-bindings-1.6.0.tar.gz) = 1197753
-diff --git main/Makefile main/Makefile
-index 1252f03..2231858 100644
---- main/Makefile
-+++ main/Makefile
+diff --git a/bindings/pkg/PLIST b/bindings/pkg/PLIST
+index 2669bcac6d9..21293f36ee3 100644
+--- a/bindings/pkg/PLIST
++++ b/bindings/pkg/PLIST
+@@ -1,5 +1,4 @@
+-@comment $OpenBSD: PLIST,v 1.3 2016/10/10 12:20:17 feinerer Exp $
+-@conflict radare-bindings2-*
++@comment $OpenBSD$
+ share/vala/vapi/
+ share/vala/vapi/libr.deps
+ share/vala/vapi/libr.vapi
+diff --git a/main/Makefile b/main/Makefile
+index 1252f030c8d..da0edac160d 100644
+--- a/main/Makefile
++++ b/main/Makefile
 @@ -5,9 +5,9 @@ COMMENT =		reverse engineers disassembler and debugger
  DISTNAME =		radare2-${V}
  
@@ -47,21 +58,32 @@ index 1252f03..2231858 100644
  	r_magic r_parse r_reg r_search r_socket r_syscall r_util
  SHARED_LIBS+=		${_lib} ${LIBV}
  .endfor
-diff --git main/distinfo main/distinfo
-index 611ecba..5fb51d2 100644
---- main/distinfo
-+++ main/distinfo
+@@ -23,7 +23,8 @@ CONFIGURE_ARGS +=	--mandir=${PREFIX}/man \
+ 			--with-libversion=${LIBV} \
+ 			--with-openssl \
+ 			--with-syscapstone \
+-			--with-syszip
++			--with-syszip \
++			--with-rpath
+ 
+ CONFIGURE_ENV +=	LDFLAGS="-L${LOCALBASE}/lib"
+ MAKE_ENV =		HOST_CC="${CC}"
+diff --git a/main/distinfo b/main/distinfo
+index 611ecbac4ab..5fb51d2085b 100644
+--- a/main/distinfo
++++ b/main/distinfo
 @@ -1,2 +1,2 @@
 -SHA256 (radare2-0.10.6.tar.xz) = joh1JrIr33g5/hB3nI2hHWFWpZmTgsL6e/Z5Gj9qnUU=
 -SIZE (radare2-0.10.6.tar.xz) = 5082028
 +SHA256 (radare2-1.6.0.tar.gz) = lZ3KwZAgkymDz/eaBpxEZ0ECF8lB4k3Z9tD8D8jU75k=
 +SIZE (radare2-1.6.0.tar.gz) = 9012700
-diff --git main/pkg/PLIST main/pkg/PLIST
-index 4e69c4e..a7da3b9 100644
---- main/pkg/PLIST
-+++ main/pkg/PLIST
+diff --git a/main/pkg/PLIST b/main/pkg/PLIST
+index 4e69c4ed08e..c8b1a87625e 100644
+--- a/main/pkg/PLIST
++++ b/main/pkg/PLIST
 @@ -1,5 +1,7 @@
- @comment $OpenBSD: PLIST,v 1.5 2016/10/10 12:20:17 feinerer Exp $
+-@comment $OpenBSD: PLIST,v 1.5 2016/10/10 12:20:17 feinerer Exp $
++@comment $OpenBSD$
  bin/r2
 +bin/r2-docker
 +bin/r2-indent
@@ -174,6 +196,15 @@ index 4e69c4e..a7da3b9 100644
  include/libr/sflib/linux-x86-32/
  include/libr/sflib/linux-x86-32/sflib.h
  include/libr/sflib/linux-x86-32/sfsyscall.h
+@@ -125,7 +144,7 @@ include/libr/sflib/linux-x86-64/sflib.h
+ include/libr/sflib/linux-x86-64/sfsyscall.h
+ include/libr/sflib/linux-x86-64/sfsysnr.h
+ lib/libr2.so
+-@bin lib/libr2.so.2.0
++@bin lib/libr2.so.3.0
+ @lib lib/libr_anal.so.${LIBr_anal_VERSION}
+ @lib lib/libr_asm.so.${LIBr_asm_VERSION}
+ @lib lib/libr_bin.so.${LIBr_bin_VERSION}
 @@ -136,7 +155,7 @@ lib/libr2.so
  @lib lib/libr_crypto.so.${LIBr_crypto_VERSION}
  @lib lib/libr_debug.so.${LIBr_debug_VERSION}
