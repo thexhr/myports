@@ -77,6 +77,48 @@ index 611ecbac4ab..5fb51d2085b 100644
 -SIZE (radare2-0.10.6.tar.xz) = 5082028
 +SHA256 (radare2-1.6.0.tar.gz) = lZ3KwZAgkymDz/eaBpxEZ0ECF8lB4k3Z9tD8D8jU75k=
 +SIZE (radare2-1.6.0.tar.gz) = 9012700
+diff --git a/main/patches/patch-Makefile b/main/patches/patch-Makefile
+index e69de29bb2d..5d6ad23c8f0 100644
+--- a/main/patches/patch-Makefile
++++ b/main/patches/patch-Makefile
+@@ -0,0 +1,37 @@
++--- Makefile.orig	Tue Jul 11 17:54:22 2017
+++++ Makefile	Tue Oct 10 21:43:02 2017
++@@ -189,7 +189,11 @@
++ 
++ install-doc:
++ 	${INSTALL_DIR} "${DESTDIR}${DOCDIR}"
++-	for FILE in doc/* ; do ${INSTALL_DATA} $$FILE "${DESTDIR}${DOCDIR}" ; done
+++	cd doc ; for DIR in `find . -type d`; do ${INSTALL_DIR} "${DESTDIR}${DOCDIR}/`basename $$DIR`"; \
+++		for FILE in `find $$DIR -type f -maxdepth 1`; \
+++		do ${INSTALL_DATA} $$FILE "${DESTDIR}${DOCDIR}/$$DIR"; \
+++		done ; \
+++	done
++ 
++ install-doc-symlink:
++ 	${INSTALL_DIR} "${DESTDIR}${DOCDIR}"
++@@ -210,8 +214,8 @@
++ 	rm -rf "${DESTDIR}${DATADIR}/radare2/${VERSION}/hud"
++ 	mkdir -p "${DESTDIR}${DATADIR}/radare2/${VERSION}/hud"
++ 	mkdir -p "${DESTDIR}${BINDIR}"
++-	ln -fs "${PWD}/sys/indent.sh" "${DESTDIR}${BINDIR}/r2-indent"
++-	ln -fs "${PWD}/sys/r2-docker.sh" "${DESTDIR}${BINDIR}/r2-docker"
+++	${INSTALL_DATA} "${PWD}/sys/indent.sh" "${DESTDIR}${BINDIR}/r2-indent"
+++	${INSTALL_DATA} "${PWD}/sys/r2-docker.sh" "${DESTDIR}${BINDIR}/r2-docker"
++ 	cp -f doc/hud "${DESTDIR}${DATADIR}/radare2/${VERSION}/hud/main"
++ 	mkdir -p "${DESTDIR}${DATADIR}/radare2/${VERSION}/"
++ 	$(SHELL) sys/ldconfig.sh
++@@ -252,8 +256,8 @@
++ 		${MAKE} install-symlink ); \
++ 	done
++ 	mkdir -p "${DESTDIR}${BINDIR}"
++-	ln -fs "${PWD}/sys/indent.sh" "${DESTDIR}${BINDIR}/r2-indent"
++-	ln -fs "${PWD}/sys/r2-docker.sh" "${DESTDIR}${BINDIR}/r2-docker"
+++	${INSTALL_DATA} "${PWD}/sys/indent.sh" "${DESTDIR}${BINDIR}/r2-indent"
+++	${INSTALL_DATA} "${PWD}/sys/r2-docker.sh" "${DESTDIR}${BINDIR}/r2-docker"
++ 	mkdir -p "${DESTDIR}${DATADIR}/radare2/${VERSION}/hud"
++ 	cd "$(DESTDIR)$(LIBDIR)/radare2/" ;\
++ 		rm -f last ; ln -fs $(VERSION) last
 diff --git a/main/pkg/PLIST b/main/pkg/PLIST
 index 4e69c4ed08e..c8b1a87625e 100644
 --- a/main/pkg/PLIST
