@@ -1,0 +1,15 @@
+diff --git sysutils/xbattmon/Makefile sysutils/xbattmon/Makefile
+index a65ba15d4..792b50185 100644
+--- sysutils/xbattmon/Makefile
++++ sysutils/xbattmon/Makefile
+@@ -25,4 +25,10 @@ FAKE_FLAGS =		PREFIX="${PREFIX}"
+ 
+ NO_TEST =		Yes
+ 
++post-patch:
++	sed -i 's/blue/black/' ${WRKSRC}/config.def.h
++	sed -i 's/green/black/' ${WRKSRC}/config.def.h
++	sed -i 's/grey/black/' ${WRKSRC}/config.def.h
++	sed -i 's/critical = 5/critical = 6/' ${WRKSRC}/config.def.h
++
+ .include <bsd.port.mk>
