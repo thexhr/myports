@@ -1,26 +1,24 @@
---- config.def.h.orig	Sat Jun 24 11:50:48 2017
-+++ config.def.h	Sat Jun 24 12:04:13 2017
-@@ -5,8 +5,9 @@
+--- config.def.h.orig	2018-04-06 11:23:21.958809688 +0200
++++ config.def.h	2018-04-06 11:28:15.271990544 +0200
+@@ -5,7 +5,7 @@
   *
   * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
   */
--static char font[] = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
 +static char font[] = "terminus-12";
  static int borderpx = 2;
-+#define histsize 2000
  
  /*
-  * What program is execed by st depends of these precedence rules:
-@@ -63,7 +64,7 @@
+@@ -63,7 +63,7 @@
  static int bellvolume = 0;
  
  /* default TERM value */
--static char termname[] = "st-256color";
-+static char termname[] = "xterm-256color";
+-char *termname = "st-256color";
++char *termname = "xterm-256color";
  
  /*
   * spaces per tab
-@@ -92,7 +93,7 @@
+@@ -92,7 +92,7 @@
  	"blue2",
  	"magenta3",
  	"cyan3",
@@ -29,18 +27,18 @@
  
  	/* 8 bright colors */
  	"gray50",
-@@ -120,6 +121,7 @@
- static unsigned int defaultbg = 0;
+@@ -120,6 +120,7 @@
+ unsigned int defaultbg = 0;
  static unsigned int defaultcs = 256;
  static unsigned int defaultrcs = 257;
 +static unsigned int defaultfading = 8;
  
  /*
   * Default shape of cursor
-@@ -172,6 +174,8 @@
- 	{ MODKEY|ShiftMask,     XK_C,           clipcopy,       {.i =  0} },
- 	{ MODKEY|ShiftMask,     XK_V,           clippaste,      {.i =  0} },
- 	{ MODKEY,               XK_Num_Lock,    numlock,        {.i =  0} },
+@@ -178,6 +179,8 @@
+ 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
+ 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
+ 	{ TERMMOD,              XK_I,           iso14755,       {.i =  0} },
 +	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
 +	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
  };

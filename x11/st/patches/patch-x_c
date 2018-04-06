@@ -1,0 +1,34 @@
+--- x.c.orig	2018-04-06 11:23:46.318907759 +0200
++++ x.c	2018-04-06 11:26:05.543468268 +0200
+@@ -239,6 +239,7 @@
+ static char *opt_title = NULL;
+ 
+ static int oldbutton = 3; /* button event on startup: 3 = release */
++static int lostfocus = 0;
+ 
+ void
+ clipcopy(const Arg *dummy)
+@@ -1344,6 +1345,9 @@
+ 	if (base.mode & ATTR_INVISIBLE)
+ 		fg = bg;
+ 
++	if (lostfocus)
++		fg = &dc.col[defaultfading];
++
+ 	/* Intelligent cleaning up of the borders. */
+ 	if (x == 0) {
+ 		xclear(0, (y == 0)? 0 : winy, borderpx,
+@@ -1840,6 +1844,13 @@
+ 					(handler[ev.type])(&ev);
+ 			}
+ 
++			if (win.mode & MODE_FOCUSED) {
++				redraw();
++			} else {
++				lostfocus = 1;
++				redraw();
++			}
++
+ 			draw();
+ 			XFlush(xw.dpy);
+ 
