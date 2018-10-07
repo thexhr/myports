@@ -1,0 +1,66 @@
+--- osd_clock.c.orig	Sun Oct  7 13:42:01 2018
++++ osd_clock.c	Sun Oct  7 13:44:05 2018
+@@ -37,6 +37,7 @@
+   {"top",      0, NULL, 't'},
+   {"bottom",   0, NULL, 'b'},
+   {"offset",   1, NULL, 'o'},
++  {"right",    1, NULL, 'r'},
+   {"help",     0, NULL, 'h'},
+   {NULL,       0, NULL, 0}
+ };
+@@ -55,10 +56,11 @@
+   char *color = "red";
+   int delay = 3; 
+   int offset = 0;
++  int right = 0;
+   int shadow = 2;
+   int interval = 1;
+ 
+-  while ((c = getopt_long(argc ,argv,"f:c:d:F:i:s:o:tbh",
++  while ((c = getopt_long(argc ,argv,"f:c:d:F:i:s:o:r:tbh",
+ 			  long_options, NULL)) != -1)
+   {
+     switch(c)
+@@ -84,6 +86,9 @@
+       case 'o':
+ 	offset = atoi(optarg);
+ 	break;
++      case 'r':
++	right = atoi(optarg);
++	break;
+       case 't':
+ 	pos = XOSD_top;
+ 	break;
+@@ -109,7 +114,16 @@
+     }
+   }
+   
+-  osd = xosd_init (font, color, delay, pos, offset, shadow);
++  osd = xosd_create(1);
++
++  xosd_set_font(osd, font);
++  xosd_set_colour(osd, color);
++  xosd_set_timeout(osd, delay);
++  xosd_set_pos(osd, pos);
++  xosd_set_vertical_offset(osd, offset);
++  xosd_set_horizontal_offset(osd, right);
++  xosd_set_shadow_offset(osd, shadow);
++  
+   if (!osd)
+   {
+     fprintf (stderr, "Error initializing osd\n");
+@@ -126,11 +140,12 @@
+    
+     strftime(output, 255, format, localtime(&curr_time));
+ 
+-    xosd_display (osd, 1, XOSD_string, output);
++    if ((xosd_display (osd, 0, XOSD_string, output)) == -1) 
++	    (void)fprintf(stderr, "xosd_display() failed\n");
+     sleep(interval);
+   }
+ 
+-  xosd_uninit (osd);
++  xosd_destroy (osd);
+   
+   return EXIT_SUCCESS;
+ }
