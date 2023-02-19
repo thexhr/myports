@@ -1,0 +1,21 @@
+@bin bin/isscrolls
+@man man/man1/isscrolls.1
+@comment test comment
+share/isscrolls/
+share/isscrolls/README
+share/isscrolls/ironsworn_assets.json
+share/isscrolls/ironsworn_delve_domains.json
+share/isscrolls/ironsworn_delve_themes.json
+share/isscrolls/ironsworn_foes.json
+share/isscrolls/ironsworn_move_oracles.json
+share/isscrolls/ironsworn_moves.json
+share/isscrolls/ironsworn_oracles_character.json
+share/isscrolls/ironsworn_oracles_delve_sites.json
+share/isscrolls/ironsworn_oracles_monstrosity.json
+share/isscrolls/ironsworn_oracles_names.json
+share/isscrolls/ironsworn_oracles_place.json
+share/isscrolls/ironsworn_oracles_prompts.json
+share/isscrolls/ironsworn_oracles_settlement.json
+share/isscrolls/ironsworn_oracles_threat.json
+share/isscrolls/ironsworn_oracles_turning_point.json
+share/isscrolls/ironsworn_world_truths.json
