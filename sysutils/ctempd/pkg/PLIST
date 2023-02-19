@@ -1,0 +1,2 @@
+@bin bin/ctempd
+@man man/man1/ctempd.1

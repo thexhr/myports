@@ -1,0 +1,2 @@
+ctempd is a small daemon to set screen temperature.  ctempd can either
+set the screen's temperature once or run in the background.
