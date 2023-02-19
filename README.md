@@ -1,1 +1,3 @@
-Just a random sample of OpenBSD ports I modified to my needs.  Copyright belongs to the original authors, blah ...
+OpenBSD ports I modified to my needs or which I don't see fit to push them to the official repo.
+
+Also contains ports for my own software.
